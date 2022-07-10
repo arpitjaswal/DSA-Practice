@@ -17,16 +17,18 @@ public:
         while(fast && fast->next){
             fast=fast->next->next;
             slow=slow->next;
-            if(fast==slow)break;
-        }
-        
-        //check if we have no cycle at all
-        if(fast==nullptr || fast->next==nullptr)return nullptr;
-        fast=head;
-        while(fast!=slow){
-            fast=fast->next;
-            slow=slow->next;
+            if(fast==slow){
+                fast=head;
+                while(fast!=slow){
+                fast=fast->next;
+                slow=slow->next;
         }
         return slow;
+            }
+        }
+        
+        // //check if we have no cycle at all
+        // if(fast==nullptr || fast->next==nullptr)return nullptr;
+        return nullptr;
     }
 };
