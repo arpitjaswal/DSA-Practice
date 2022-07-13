@@ -28,31 +28,50 @@ struct Node {
   }
 };
 */
-#include<vector>
+
 class Solution{
   private:
-  bool isPalindromeVector(vector<int>v){
-      int n=v.size();
-      int i=0;
-      int j=n-1;
-      while(i<=j){
-          if(v[i]!=v[j])return false;
-          i++;
-          j--;
+  Node* getMid(Node* head){
+      Node* fast=head->next, *slow=head;
+      while(fast && fast->next){
+          slow=slow->next;
+          fast=fast->next->next;
       }
-      return true;
+      return slow;
   }
+  
+  Node* reverseLL(Node* head){
+      Node* curr=head;
+      Node* prev=NULL;
+      Node* n=NULL;
+      while(curr){
+          n=curr->next;
+          curr->next=prev;
+          prev=curr;
+          curr=n;
+          //if(n)n=n->next;
+      }
+      return prev;
+  }
+  
   public:
     //Function to check whether the list is palindrome.
     bool isPalindrome(Node *head)
     {
-        vector<int>v;
-        Node* temp=head;
-        while(temp){
-            v.push_back(temp->data);
-            temp=temp->next;
+        //find middle
+        Node* middle=getMid(head);
+        
+        //reverse list after middle
+        Node* temp=middle->next;
+        middle->next=reverseLL(temp);
+        
+        Node* head1=head, *head2=middle->next;
+        while(head2){
+            if(head1->data!=head2->data)return false;
+            head1=head1->next;
+            head2=head2->next;
         }
-        return isPalindromeVector(v);
+        return true;
     }
 };
 
