@@ -41,31 +41,23 @@ class Solution{
   }
   
   Node* reverseLL(Node* head){
-      Node* curr=head;
-      Node* prev=NULL;
-      Node* n=NULL;
+      Node* curr=head, *prev=NULL, *n=NULL;
       while(curr){
           n=curr->next;
           curr->next=prev;
           prev=curr;
           curr=n;
-          //if(n)n=n->next;
       }
       return prev;
   }
-  
   public:
     //Function to check whether the list is palindrome.
     bool isPalindrome(Node *head)
     {
-        //find middle
         Node* middle=getMid(head);
-        
-        //reverse list after middle
         Node* temp=middle->next;
         middle->next=reverseLL(temp);
-        
-        Node* head1=head, *head2=middle->next;
+        Node *head1=head, *head2=middle->next;
         while(head2){
             if(head1->data!=head2->data)return false;
             head1=head1->next;
