@@ -11,15 +11,19 @@
  */
 class Solution {
 private:
-    int depth(TreeNode* root){
-        if(root==NULL)return NULL;
-        return max(depth(root->left), depth(root->right))+1;
+    int dfsheight(TreeNode* root){
+        if(root==NULL)return false;
+        
+        int left=dfsheight(root->left);
+        if(left==-1)return -1;
+        int right=dfsheight(root->right);
+        if(right==-1)return -1;
+        //if(left==-1 && right==-1)return -1;
+        if(abs(left-right)>1)return -1;
+        return 1+max(left,right);
     }
 public:
     bool isBalanced(TreeNode* root) {
-        if(root==NULL)return true;
-        int lefttree=depth(root->left);
-        int righttree=depth(root->right);
-        return abs(lefttree-righttree)<=1 && isBalanced(root->left) && isBalanced(root->right);
+        return dfsheight(root)!=-1;
     }
 };
