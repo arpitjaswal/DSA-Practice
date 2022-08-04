@@ -22,17 +22,16 @@ public:
         //     invertTree(root->left);
         // }
         // return root;
-        if(root == NULL){
-            return NULL;
+        if(root==NULL)return NULL;
+        stack<TreeNode*>s;
+        s.push(root);
+        while(!s.empty()){
+            TreeNode* temp=s.top();
+            s.pop();
+            swap(temp->left, temp->right);
+            if(temp->left)s.push(temp->left);
+            if(temp->right)s.push(temp->right);
         }
-        
-        TreeNode *tmp = root->left;
-        root->left = root->right;
-        root->right = tmp;
-        
-        if(root->left) invertTree(root->left);
-        if(root->right) invertTree(root->right);
-        
         return root;
     }
 };
