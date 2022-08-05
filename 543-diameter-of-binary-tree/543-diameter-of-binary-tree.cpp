@@ -11,17 +11,25 @@
  */
 class Solution {
 private:
-    int maxdepth(TreeNode* root, int &d){
-        if(root==NULL)return 0;
-        int leftsub=maxdepth(root->left, d);
-        int rightsub=maxdepth(root->right,d);
-        d=max(d, leftsub+rightsub);
-        return max(leftsub,rightsub)+1;
+    pair<int,int> diameter(TreeNode* root){
+        //base case
+        if(root==NULL)
+            return make_pair(0,0);
+        
+        pair<int,int>left=diameter(root->left);
+        pair<int,int>right=diameter(root->right);
+        
+        int pos1=left.first;
+        int pos2=right.first;
+        int pos3=left.second+right.second;
+        
+        pair<int,int>ans;
+        ans.first=max(pos1, max(pos2, pos3));
+        ans.second=max(left.second, right.second)+1;
+        return ans;
     }
 public:
     int diameterOfBinaryTree(TreeNode* root) {
-        int diameter=0;
-        maxdepth(root,diameter);
-        return diameter;
+        return diameter(root).first;
     }
 };
