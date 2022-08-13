@@ -30,8 +30,8 @@ private:
     }
 public:
     void recoverTree(TreeNode* root) {
-        first=middle=last=NULL;
-        prev= new TreeNode(INT_MIN);
+        prev=first=middle=last=NULL;
+        //prev= new TreeNode(INT_MIN);
         inorder(root);
         if(last!=NULL)swap(first->val,last->val);
         else
