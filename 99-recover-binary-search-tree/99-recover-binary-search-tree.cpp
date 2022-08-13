@@ -10,28 +10,31 @@
  * };
  */
 class Solution {
-    vector<int>in;
-    int i=0;
+    private:
+    TreeNode* prev,*first,*middle,*last;
 private:
     void inorder(TreeNode* root){
         if(root==NULL)return;
         
         inorder(root->left);
-        in.push_back(root->val);
+        if(prev!=NULL && prev->val>root->val){
+            if(first==NULL){
+                first=prev;
+                middle=root;
+            }
+            else
+                last=root;
+        }
+        prev=root;
         inorder(root->right);
-    }
-    void correct(TreeNode* root){
-        if(!root)return;
-        
-        correct(root->left);
-        if(in[i]!=root->val)swap(in[i],root->val);
-        i++;
-        correct(root->right);
     }
 public:
     void recoverTree(TreeNode* root) {
+        first=middle=last=NULL;
+        prev= new TreeNode(INT_MIN);
         inorder(root);
-        sort(in.begin(),in.end());
-        correct(root);
+        if(last!=NULL)swap(first->val,last->val);
+        else
+            swap(first->val,middle->val);
     }
 };
