@@ -20,16 +20,16 @@ public:
 
 class Solution {
 private:
-    void inorder(Node* root, vector<int>&ans){
+    void preorder(Node* root, vector<int>&ans){
         if(root==NULL)return;
         
         ans.push_back(root->val);
-        for(auto x:root->children)inorder(x,ans);
+        for(auto x:root->children)preorder(x,ans);
     }
 public:
     vector<int> preorder(Node* root) {
         vector<int>ans;
-        inorder(root,ans);
+        preorder(root,ans);
         return ans;
     }
 };
