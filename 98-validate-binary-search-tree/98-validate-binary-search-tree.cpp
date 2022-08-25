@@ -11,18 +11,19 @@
  */
 class Solution {
 private:
-    void inordertrav(TreeNode* root, vector<int>&ans){
+    void inordertrav(TreeNode* root, vector<int>&inorder){
         if(root==NULL)return;
-        inordertrav(root->left,ans);
-        ans.push_back(root->val);
-        inordertrav(root->right,ans);
+        inordertrav(root->left,inorder);
+        inorder.push_back(root->val);
+        inordertrav(root->right,inorder);
     }
 public:
     bool isValidBST(TreeNode* root) {
-        vector<int>ans;
-        inordertrav(root,ans);
-        for(int i=1;i<ans.size();i++){
-            if(ans[i]<=ans[i-1])return false;
+        //property: inorder traversal of a bst is always non-decreasing
+        vector<int>inorder;
+        inordertrav(root,inorder);
+        for(int i=1;i<inorder.size();i++){
+            if(inorder[i]<=inorder[i-1])return false;
         }
         return true;
     }
