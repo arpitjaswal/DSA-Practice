@@ -16,7 +16,7 @@ public:
         TreeNode* node=root;
         stack<TreeNode*>s;
         while(true){
-            if(node!=NULL){
+            if(node){
                 s.push(node);
                 node=node->left;
             }
