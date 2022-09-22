@@ -23,3 +23,5 @@ public:
         return abs(lefttree-righttree)<=1 && isBalanced(root->left) && isBalanced(root->right);
     }
 };
+//TC: O(n)
+//SC: O(n)/O(1)
