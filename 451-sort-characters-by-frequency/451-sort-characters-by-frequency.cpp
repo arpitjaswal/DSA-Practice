@@ -1,21 +1,23 @@
 class Solution {
 public:
     string frequencySort(string s) {
+        int n=s.length();
         string res="";
         unordered_map<char,int>m;
         for(auto x: s){
             m[x]++;
         }
-        vector<string>bucket(s.length()+1,"");
-        for(auto it: m){
-            int n=it.second;
-            int c=it.first;
-            bucket[n].append(n,c);
+        priority_queue<pair<int,char>>p;
+        for(auto v:m){
+            p.push(make_pair(v.second,v.first));
         }
-        for(int i=s.length();i>0;i--){
-            if(!bucket[i].empty()){
-                res.append(bucket[i]);
+        while(!p.empty()){
+            int n=p.top().first;
+            int c=p.top().second;
+            while(n--){
+                res+=c;
             }
+            p.pop();
         }
         return res;
     }
