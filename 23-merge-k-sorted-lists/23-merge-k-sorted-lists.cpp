@@ -34,3 +34,5 @@ public:
         return lists.front();
     }
 };
+//TC: O(klog(n))
+//SC: O(n)
