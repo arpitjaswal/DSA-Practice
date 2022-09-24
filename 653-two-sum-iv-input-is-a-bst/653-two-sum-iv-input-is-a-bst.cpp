@@ -10,25 +10,20 @@
  * };
  */
 class Solution {
-private:
-    void inordertrav(TreeNode* root, vector<int>&inorder){
-        if(!root)return;
-        inordertrav(root->left,inorder);
-        inorder.push_back(root->val);
-        inordertrav(root->right, inorder);
-    }
+    vector<int>in;
 public:
+    void inorder(TreeNode* root){
+        if(!root)return;
+        inorder(root->left);
+        in.push_back(root->val);
+        inorder(root->right);
+    }
     bool findTarget(TreeNode* root, int k) {
-        vector<int>inorder;
-        inordertrav(root, inorder);
+        inorder(root);
         unordered_map<int,int>m;
-        // for(auto x: inorder){
-        //     m[x]++;
-        // }
-        //if(inorder.size()<2)return false;
-        for(int i=0;i<inorder.size();i++){
-            if(m.find(k-inorder[i])!=m.end())return true;
-            m[inorder[i]]=i;
+        for(int i=0;i<in.size();i++){
+            if(m.find(k-in[i])!=m.end())return true;
+            m[in[i]]=i;
         }
         return false;
     }
