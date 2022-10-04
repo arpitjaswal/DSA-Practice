@@ -13,10 +13,10 @@ class Solution {
 public:
     bool hasPathSum(TreeNode* root, int targetSum) {
         //if there is no tree
-        if(!root)return false;
-        //if there is only a root and its value is exactly what we are looking for
-        if(root->val==targetSum && !root->left && !root->right)return true;
-        //check for each possible path in the left and right subtree and if ever encounter target sum, return true
+       if(!root)return false;
+        //if the root we have is the targetsum we were looking for and there is no right or left subtree
+       if(root->val==targetSum && !root->left && !root->right)return true;
+        //check in the left or right subtree and return if ever encounter target sum
         return hasPathSum(root->left, targetSum-root->val) || hasPathSum(root->right, targetSum-root->val);
     }
 };
