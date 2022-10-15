@@ -5,9 +5,7 @@ using namespace std;
 // } Driver Code Ends
 class Solution
 {
-    public:
-    //Function to find the maximum number of meetings that can
-    //be performed in a meeting room.
+    private:
     struct meetings{
         int s;
         int e;
@@ -19,22 +17,23 @@ class Solution
         else if(x.p<y.p)return true;
         return false;
     }
+    public:
     int maxMeetings(int start[], int end[], int n)
     {
-        struct meetings arr[n];
+        struct meetings m[n];
         for(int i=0;i<n;i++){
-            arr[i].s=start[i];
-            arr[i].e=end[i];
-            arr[i].p=i+1;
+            m[i].s=start[i];
+            m[i].e=end[i];
+            m[i].p=i+1;
         }
-        sort(arr,arr+n,cmp);
+        sort(m,m+n,cmp);
+        int limit=m[0].e;
         vector<int>ans;
-        int limit=arr[0].e;
-        ans.push_back(arr[0].p);
+        ans.push_back(m[0].p);
         for(int i=1;i<n;i++){
-            if(arr[i].s>limit){
-                limit=arr[i].e;
-                ans.push_back(arr[i].p);
+            if(m[i].s>limit){
+                limit=m[i].e;
+                ans.push_back(m[i].p);
             }
         }
         return ans.size();
